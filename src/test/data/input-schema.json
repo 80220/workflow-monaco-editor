@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Node Configuration",
+  "type": "object",
+  "properties": {
+    "request_proxy": {
+      "type": "string"
+    },
+    "input": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["GET", "POST", "PUT", "DELETE", "PATCH"],
+          "default": "GET"
+        },
+        "headers": {
+          "type": "object",
+          "patternProperties": {
+            ".*": { "type": "string" }
+          },
+          "additionalProperties": false,
+          "default": {
+            "request-header-1": ""
+          }
+        },
+        "queryParams": {
+          "type": "object",
+          "patternProperties": {
+            ".*": { "type": "string" }
+          },
+          "additionalProperties": false,
+          "default": {
+            "request-param-1": ""
+          }
+        },
+        "body": {
+          "type": "object",
+          "default": {}
+        }
+      },
+      "required": ["method"]
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "store_response": {
+          "type": "boolean",
+          "default": false
+        },
+        "exports": {
+          "type": "object",
+          "properties": {
+            "status_code": {
+              "type": "object",
+              "properties": {
+                "export_as": {
+                  "type": "string"
+                }
+              },
+              "default": {"export_as": "response_status_code"},
+              "required": ["export_as"]
+            },
+            "headers": {
+              "type": "object",
+              "properties": {
+                "export_as": {
+                  "type": "string"
+                }
+              },
+              "default": {"export_as": "response_headers"},
+              "required": ["export_as"]
+            },
+            "response_data": {
+              "type": "object",
+              "properties": {
+                "data_path": {
+                  "type": "string"
+                },
+                "export_as": {
+                  "type": "string"
+                }
+              },
+              "default": {"export_as": "response_data"},
+              "required": ["data_path", "export_as"]
+            }
+          }
+        }
+      },
+      "required": ["store_response"]
+    }
+  },
+  "required": ["input", "output"]
+}
