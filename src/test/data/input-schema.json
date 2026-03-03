@@ -81,7 +81,7 @@
                   "type": "string"
                 }
               },
-              "default": {"export_as": "response_data"},
+              "default": {"data_path": "", "export_as": "response_data"},
               "required": ["data_path", "export_as"]
             }
           }

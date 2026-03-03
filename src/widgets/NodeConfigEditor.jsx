@@ -1,5 +1,6 @@
 import createNodeConfigEditor from "../editors/nodeConfigEditor";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
+import { generateJSONFromSchema } from "./utils";
 
 const autosuggestions = [
   {
@@ -19,12 +20,20 @@ const autosuggestions = [
   },
 ];
 
-function NodeConfigEditor({ height, width, schema, value = "{}" }) {
+function NodeConfigEditor({ height, width, schema, value }) {
+  const initialValue = useMemo(() => {
+    if (value) return value;
+    if (schema) {
+      return JSON.stringify(generateJSONFromSchema(schema), null, 2);
+    }
+    return "{}";
+  }, [value, schema]);
+
   useEffect(() => {
     console.log("Initializing Monaco Editor");
     const editor = createNodeConfigEditor(
       "container",
-      value,
+      initialValue,
       "json",
       schema,
       autosuggestions,
@@ -32,7 +41,8 @@ function NodeConfigEditor({ height, width, schema, value = "{}" }) {
     return () => {
       editor.dispose();
     };
-  }, [schema, value]);
+  }, [schema, initialValue]);
+
   return <div id="container" style={{ height, width }}></div>;
 }
 
