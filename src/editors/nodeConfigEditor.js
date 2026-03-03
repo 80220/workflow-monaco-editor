@@ -19,16 +19,18 @@ function createNodeConfigEditor(
   jsonSchema,
   autosuggestions,
 ) {
-  monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-    validate: true,
-    schemas: [
-      {
-        uri: "http://my-schema.json",
-        fileMatch: ["*"],
-        schema: jsonSchema,
-      },
-    ],
-  });
+  if (jsonSchema) {
+    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+      validate: true,
+      schemas: [
+        {
+          uri: "http://my-schema.json",
+          fileMatch: ["*"],
+          schema: jsonSchema,
+        },
+      ],
+    });
+  }
 
   monaco.languages.registerCompletionItemProvider("json", {
     triggerCharacters: ["@"],
