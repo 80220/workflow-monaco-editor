@@ -69,7 +69,7 @@ function createNodeConfigEditor(
     keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.F10],
     contextMenuGroupId: "1_modification",
     contextMenuOrder: 1.1,
-    run: function (editor) {
+    run: function () {
       alert("Add action triggered!");
       return null;
     },
@@ -81,7 +81,7 @@ function createNodeConfigEditor(
     keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.F10],
     contextMenuGroupId: "1_modification",
     contextMenuOrder: 1.2,
-    run: function (editor) {
+    run: function () {
       alert("Delete action triggered!");
       return null;
     },
@@ -93,7 +93,7 @@ function createNodeConfigEditor(
     keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.F10],
     contextMenuGroupId: "1_modification",
     contextMenuOrder: 1.3,
-    run: function (editor) {
+    run: function () {
       alert("Remove action triggered!");
       return null;
     },

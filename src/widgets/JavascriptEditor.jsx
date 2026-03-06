@@ -19,7 +19,7 @@ function JavascriptEditor({ height, width }) {
       editor.dispose();
     };
   }, []);
-  return <div id="container-js-editor" style={{ height: "600px", width: "600px", border: "1px solid #000000" }}></div>;
+  return <div id="container-js-editor" style={{ height, width, border: "1px solid #000000" }}></div>;
 }
 
 export default JavascriptEditor;

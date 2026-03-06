@@ -1,3 +1,4 @@
+/* global describe, it, expect */
 import { generateJSONFromSchema } from './utils';
 import inputSchema from '../test/data/input-schema.json';
 
