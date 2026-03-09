@@ -13,7 +13,7 @@ function createDependencyProposals(range, autosuggestions) {
 }
 
 function createNodeConfigEditor(
-  mountElementId,
+  mountElement,
   value,
   language,
   jsonSchema,
@@ -48,7 +48,8 @@ function createNodeConfigEditor(
     },
   });
 
-  const editor = monaco.editor.create(document.getElementById(mountElementId), {
+  const element = typeof mountElement === "string" ? document.getElementById(mountElement) : mountElement;
+  const editor = monaco.editor.create(element, {
     value,
     language,
     minimap: { enabled: false },

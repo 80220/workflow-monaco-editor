@@ -25,6 +25,7 @@ describe('generateJSONFromSchema', () => {
             "export_as": "response_headers"
           },
           "response_data": {
+            "data_path": "",
             "export_as": "response_data"
           }
         }

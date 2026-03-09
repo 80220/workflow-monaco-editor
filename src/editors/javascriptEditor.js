@@ -1,7 +1,8 @@
 import monaco from "../init";
 
-function createJavascriptEditor(mountElementId, value) {
-  return monaco.editor.create(document.getElementById(mountElementId), {
+function createJavascriptEditor(mountElement, value) {
+  const element = typeof mountElement === "string" ? document.getElementById(mountElement) : mountElement;
+  return monaco.editor.create(element, {
     value,
     language: "javascript",
     fontSize: 13,
@@ -13,8 +14,7 @@ function createJavascriptEditor(mountElementId, value) {
     //   vertical: "auto",
     //   horizontal: "auto",
     // },
-    	scrollBeyondLastLine: false,
-
+    scrollBeyondLastLine: false,
   });
 }
 export default createJavascriptEditor;
