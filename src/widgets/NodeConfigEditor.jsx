@@ -2,7 +2,7 @@ import createNodeConfigEditor from "../editors/nodeConfigEditor";
 import { useEffect, useMemo, useRef } from "react";
 import { generateJSONFromSchema } from "./utils";
 
-function NodeConfigEditor({ height, width, schema, value, autosuggestions = [] }) {
+function NodeConfigEditor({ height, width, schema, value, autosuggestions = [], monacoOptions = {} }) {
   const editorRef = useRef(null);
   const providerRef = useRef(null);
   const containerRef = useRef(null);
@@ -26,6 +26,7 @@ function NodeConfigEditor({ height, width, schema, value, autosuggestions = [] }
       "json",
       schema,
       autosuggestions,
+      monacoOptions,
     );
     editorRef.current = editor;
     providerRef.current = completionProvider;
@@ -41,6 +42,12 @@ function NodeConfigEditor({ height, width, schema, value, autosuggestions = [] }
       }
     };
   }, [schema, initialValue, autosuggestions]);
+
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.updateOptions(monacoOptions);
+    }
+  }, [monacoOptions]);
 
   return <div ref={containerRef} style={{ height, width }}></div>;
 }

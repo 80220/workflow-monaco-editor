@@ -18,6 +18,7 @@ function createNodeConfigEditor(
   language,
   jsonSchema,
   autosuggestions,
+  monacoOptions = {},
 ) {
   if (jsonSchema) {
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
@@ -52,16 +53,7 @@ function createNodeConfigEditor(
   const editor = monaco.editor.create(element, {
     value,
     language,
-    minimap: { enabled: false },
-    fontSize: 13,
-    lineNumbersMinChars: 3,
-    automaticLayout: true,
-    theme: "vs-dark",
-    scrollbar: {
-      vertical: "auto",
-      horizontal: "auto",
-    },
-    scrollBeyondLastLine: false,
+    ...monacoOptions,
   });
 
   editor.addAction({

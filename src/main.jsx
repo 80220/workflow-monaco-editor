@@ -32,38 +32,50 @@ export const App = () => {
     <div className="app-container">
       <div className="tabs">
         <button
-          className={activeTab === 'NodeConfigEditor' ? 'active' : ''}
-          onClick={() => setActiveTab('NodeConfigEditor')}
+          className={activeTab === "NodeConfigEditor" ? "active" : ""}
+          onClick={() => setActiveTab("NodeConfigEditor")}
         >
           NodeConfigEditor
         </button>
         <button
-          className={activeTab === 'JavascriptEditor' ? 'active' : ''}
-          onClick={() => setActiveTab('JavascriptEditor')}
+          className={activeTab === "JavascriptEditor" ? "active" : ""}
+          onClick={() => setActiveTab("JavascriptEditor")}
         >
           JavascriptEditor
         </button>
         <button
-          className={activeTab === 'JobExecutionLogger' ? 'active' : ''}
-          onClick={() => setActiveTab('JobExecutionLogger')}
+          className={activeTab === "JobExecutionLogger" ? "active" : ""}
+          onClick={() => setActiveTab("JobExecutionLogger")}
         >
           JobExecutionLogger
         </button>
       </div>
 
       <div className="tab-content">
-        {activeTab === 'NodeConfigEditor' && (
+        {activeTab === "NodeConfigEditor" && (
           <NodeConfigEditor
             height="600px"
             width="800px"
             schema={jsonSchema}
             autosuggestions={autosuggestions}
+            monacoOptions={{
+              minimap: { enabled: false },
+              fontSize: 13,
+              lineNumbersMinChars: 3,
+              automaticLayout: true,
+              theme: "vs-dark",
+              scrollbar: {
+                vertical: "auto",
+                horizontal: "auto",
+              },
+              scrollBeyondLastLine: false,
+            }}
           />
         )}
-        {activeTab === 'JavascriptEditor' && (
+        {activeTab === "JavascriptEditor" && (
           <JavascriptEditor height="600px" width="800px" />
         )}
-        {activeTab === 'JobExecutionLogger' && <JobExecutionLogger />}
+        {activeTab === "JobExecutionLogger" && <JobExecutionLogger />}
       </div>
     </div>
   );
