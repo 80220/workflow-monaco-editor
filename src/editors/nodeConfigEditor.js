@@ -32,7 +32,7 @@ function createNodeConfigEditor(
     });
   }
 
-  monaco.languages.registerCompletionItemProvider("json", {
+  const completionProvider = monaco.languages.registerCompletionItemProvider("json", {
     triggerCharacters: ["@"],
     provideCompletionItems: function (model, position) {
       var word = model.getWordUntilPosition(position);
@@ -100,7 +100,7 @@ function createNodeConfigEditor(
     },
   });
 
-  return editor;
+  return { editor, completionProvider };
 }
 
 export default createNodeConfigEditor;

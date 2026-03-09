@@ -4,6 +4,7 @@ import { generateJSONFromSchema } from "./utils";
 
 function NodeConfigEditor({ height, width, schema, value, autosuggestions = [] }) {
   const editorRef = useRef(null);
+  const providerRef = useRef(null);
   const containerRef = useRef(null);
 
   const initialValue = useMemo(() => {
@@ -19,24 +20,30 @@ function NodeConfigEditor({ height, width, schema, value, autosuggestions = [] }
     if (editorRef.current) return;
 
     console.log("Initializing Monaco Editor");
-    editorRef.current = createNodeConfigEditor(
+    const { editor, completionProvider } = createNodeConfigEditor(
       containerRef.current,
       initialValue,
       "json",
       schema,
       autosuggestions,
     );
+    editorRef.current = editor;
+    providerRef.current = completionProvider;
 
     return () => {
       if (editorRef.current) {
         editorRef.current.dispose();
         editorRef.current = null;
       }
+      if (providerRef.current) {
+        providerRef.current.dispose();
+        providerRef.current = null;
+      }
     };
   }, [schema, initialValue, autosuggestions]);
 
   return <div ref={containerRef} style={{ height, width }}></div>;
-
 }
 
 export default NodeConfigEditor;
+
