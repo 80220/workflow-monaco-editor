@@ -41,7 +41,7 @@ function NodeConfigEditor({ height, width, schema, value, autosuggestions = [], 
         providerRef.current = null;
       }
     };
-  }, [schema, initialValue, autosuggestions]);
+  }, [schema, initialValue, autosuggestions, monacoOptions]);
 
   useEffect(() => {
     if (editorRef.current) {

@@ -7,6 +7,13 @@ import JobExecutionLogger from "./widgets/JobExecutionLogger";
 import "./main.css";
 import jsonSchema from "./test/data/input-schema.json";
 
+const defaultCodeSnippet = `// Load the full build.
+const _ = require('lodash');
+
+function transform(a, b, c) {
+    return;
+}`
+
 const autosuggestions = [
   {
     label: "@global.request-proxy-1",
@@ -73,7 +80,23 @@ export const App = () => {
           />
         )}
         {activeTab === "JavascriptEditor" && (
-          <JavascriptEditor height="600px" width="800px" />
+          <JavascriptEditor
+            height="600px"
+            width="800px"
+            codeSnippet={defaultCodeSnippet}
+            monacoOptions={{
+              minimap: { enabled: false },
+              fontSize: 13,
+              lineNumbersMinChars: 3,
+              automaticLayout: true,
+              theme: "vs-dark",
+              scrollbar: {
+                vertical: "auto",
+                horizontal: "auto",
+              },
+              scrollBeyondLastLine: false,
+            }}
+          />
         )}
         {activeTab === "JobExecutionLogger" && <JobExecutionLogger />}
       </div>

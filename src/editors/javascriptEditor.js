@@ -1,6 +1,6 @@
 import monaco from "../init";
 
-function createJavascriptEditor(mountElement, value) {
+function createJavascriptEditor(mountElement, value, options = {}) {
   const element = typeof mountElement === "string" ? document.getElementById(mountElement) : mountElement;
   return monaco.editor.create(element, {
     value,
@@ -15,6 +15,7 @@ function createJavascriptEditor(mountElement, value) {
     //   horizontal: "auto",
     // },
     scrollBeyondLastLine: false,
+    ...options,
   });
 }
 export default createJavascriptEditor;

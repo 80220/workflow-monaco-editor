@@ -1,14 +1,7 @@
 import createJavascriptEditor from "../editors/javascriptEditor";
 import { useEffect, useRef } from "react";
 
-const codeSnippet = `// Load the full build.
-const _ = require('lodash');
-
-function transform(a, b, c) {
-    return;
-}`
-
-function JavascriptEditor({ height, width }) {
+function JavascriptEditor({ height, width, codeSnippet = "", monacoOptions = {} }) {
   const editorRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -20,6 +13,7 @@ function JavascriptEditor({ height, width }) {
     editorRef.current = createJavascriptEditor(
       containerRef.current,
       codeSnippet,
+      monacoOptions,
     );
     return () => {
       if (editorRef.current) {
@@ -27,7 +21,14 @@ function JavascriptEditor({ height, width }) {
         editorRef.current = null;
       }
     };
-  }, []);
+  }, [codeSnippet, monacoOptions]);
+
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.updateOptions(monacoOptions);
+    }
+  }, [monacoOptions]);
+
   return <div ref={containerRef} style={{ height, width, border: "1px solid #000000" }}></div>;
 }
 
