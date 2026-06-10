@@ -5,11 +5,7 @@ import { resolve } from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    react({
-      babel: {
-        plugins: [['babel-plugin-react-compiler']],
-      },
-    }),
+    react(),
   ],
   build: {
     lib: {
@@ -18,12 +14,20 @@ export default defineConfig({
       fileName: (format) => `workflow-monaco-editor.${format}.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'monaco-editor'],
+      external: [
+        'react',
+        'react-dom',
+        'monaco-editor',
+        'react/jsx-runtime',
+        'react/jsx-dev-runtime',
+      ],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
           'monaco-editor': 'monaco',
+          'react/jsx-runtime': 'ReactJSXRuntime',
+          'react/jsx-dev-runtime': 'ReactJSXRuntimeDev',
         },
       },
     },
