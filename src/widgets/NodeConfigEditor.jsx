@@ -25,7 +25,7 @@ function NodeConfigEditor({ height, width, schema, value, autosuggestions = [], 
     if (!containerRef.current) return;
     if (editorRef.current) return;
 
-    console.log("Initializing Monaco Editor");
+    console.log("NodeConfigEditor initializing Monaco Editor");
     const { editor, completionProvider } = createNodeConfigEditor(
       containerRef.current,
       initialValue,
@@ -36,6 +36,7 @@ function NodeConfigEditor({ height, width, schema, value, autosuggestions = [], 
     );
     editorRef.current = editor;
     providerRef.current = completionProvider;
+    console.log("NodeConfigEditor initialized Monaco Editor", editorRef.current);
 
     const validate = () => {
       if (!editorRef.current) return;
